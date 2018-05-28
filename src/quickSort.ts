@@ -1,43 +1,41 @@
 module sort {
-	export class quickSort extends Sort{
+	export class quickSort extends Sort {
 		public constructor(arr: number[]) {
 			super(arr);
 		}
-		public init(arr: number[]){
-			let i = 0;
-			let j = arr.length - 1;
-			this.sort(arr,i,j);
+
+		public init(arr: number[]) {
+			this.quickSort(arr, 0, arr.length - 1);
 		}
 
-		private sort(arr: number[], i:number, j: number){
-			if(i == j){
-				return;
+		private quickSort(arr, left, right) {
+			let partitionIndex;
+			if (left < right) {
+				partitionIndex = this.partition(arr, left, right);
+				this.quickSort(arr, left, partitionIndex - 1);
+				this.quickSort(arr, partitionIndex, right);
 			}
+		}
 
-			var key = arr[i];
-			var stepi = i;
-			var stepj = j;
-			while(j > i){
-				if(arr[j] >= key){
-					j--;
-				}else{
-					arr[i] = arr[j];
-					while(j > ++i){
-						if(arr[i] > key){
-							arr[j] = arr[i];
-							break;
-						}
-					}
+		/**分区操作 */
+		public partition(arr, left, right) {
+			var pivot = left,
+				index = pivot - 1;
+			for (let i = index; i <= right; i++) {
+				if (arr[i] < arr[pivot]) {
+					this.swap(arr, i, index);
+					index++;
 				}
 			}
-			if(stepi == i){
-				this.sort(arr,++i,stepj);
-				return;
-			}
-			arr[i] = key;
-			//递归
-			this.sort(arr,stepi,i);
-			this.sort(arr,j,stepj);
+			this.swap(arr, pivot, index - 1);
+			return index - 1;
+		}
+
+		/**交换数字 */
+		public swap(arr, i, j) {
+			var temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
 		}
 	}
 }

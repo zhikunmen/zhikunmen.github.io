@@ -7,15 +7,14 @@ class Main extends egret.DisplayObjectContainer {
     private _sortArr: number[] = [];
     private _system: sort.systemSort;
     private _bubbleSort: sort.bubbleSort;
-    private _quickSort: sort.quickSort;
-    private _inserSort: sort.insertSort;
     private _sortFunc: any[] = [];
     private _btnPanel: egret.Sprite;
     private _logTex: egret.TextField;
     private _scroll: egret.ScrollView;
     public initUI(): void {
-        this._sortFunc.push({ "name": "system","cn":"系统排序" }); this._sortFunc.push({ "name": "bubble","cn":"冒泡排序" });
-        this._sortFunc.push({ "name": "quick","cn":"快速排序" });  this._sortFunc.push({ "name": "insert","cn":"插入排序" });
+        this._sortFunc.push({ "name": "system","cn":"系统排序" }); 
+        this._sortFunc.push({ "name": "bubble","cn":"冒泡排序" });
+        this._sortFunc.push({ "name": "quick","cn":"快速排序" });
         this._btnPanel = new egret.Sprite();
         this.addChild(this._btnPanel);
         this._logTex = new egret.TextField();
@@ -46,7 +45,10 @@ class Main extends egret.DisplayObjectContainer {
             txt.textColor = 0xff0000;
             txt.size = 30;
             txt.width = 200;
+            txt.touchEnabled = true;
             txt.textAlign = egret.HorizontalAlign.LEFT;
+            txt.name = this._sortFunc[i]["name"];
+            txt.addEventListener(egret.TouchEvent.TOUCH_TAP, this.sort, this);
         }
     }
 
@@ -58,6 +60,7 @@ class Main extends egret.DisplayObjectContainer {
             this._sortArr.push(Math.random() * 10000);
         }
         let type = evt.currentTarget.name;
+        console.log(this._sortArr);
         switch (type) {
             case "system":
                 if (!this._system) {
@@ -72,16 +75,8 @@ class Main extends egret.DisplayObjectContainer {
                 this._bubbleSort = null;
                 break;
             case "quick":
-                if(!this._quickSort){
-                    this._quickSort = new sort.quickSort(this._sortArr);
-                }
-                this._quickSort = null;
-                break;
-            case "insert":
-                if(!this._inserSort){
-                    this._inserSort = new sort.insertSort(this._sortArr);
-                }
-                this._inserSort = null;
+                let quick = new sort.quickSort(this._sortArr);
+                quick = null;
                 break;
         }
         for (let i = 0; i < this._sortArr.length; i++) {
