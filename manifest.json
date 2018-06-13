@@ -1,0 +1,18 @@
+{
+	"initial": [
+		"libs/modules/egret/egret.js",
+		"libs/modules/egret/egret.web.js",
+		"libs/modules/game/game.js"
+	],
+	"game": [
+		"bin-debug/Sort.js",
+		"bin-debug/bubbleSort.js",
+		"bin-debug/insertSort.js",
+		"bin-debug/Main.js",
+		"bin-debug/quickSort.js",
+		"bin-debug/selectSort.js",
+		"bin-debug/shellSort.js",
+		"bin-debug/systemSort.js",
+		"bin-debug/yefan.js"
+	]
+}

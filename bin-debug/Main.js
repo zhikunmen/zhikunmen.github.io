@@ -19,6 +19,8 @@ var Main = (function (_super) {
         this._sortFunc.push({ "name": "system", "cn": "系统排序" });
         this._sortFunc.push({ "name": "bubble", "cn": "冒泡排序" });
         this._sortFunc.push({ "name": "quick", "cn": "快速排序" });
+        this._sortFunc.push({ "name": "shell", "cn": "希尔排序" });
+        this._sortFunc.push({ "name": "select", "cn": "选择排序" });
         this._sortFunc.push({ "name": "insert", "cn": "插入排序" });
         this._btnPanel = new egret.Sprite();
         this.addChild(this._btnPanel);
@@ -50,8 +52,24 @@ var Main = (function (_super) {
             txt.textColor = 0xff0000;
             txt.size = 30;
             txt.width = 200;
+            txt.touchEnabled = true;
             txt.textAlign = egret.HorizontalAlign.LEFT;
+            txt.name = this._sortFunc[i]["name"];
+            txt.addEventListener(egret.TouchEvent.TOUCH_TAP, this.sort, this);
         }
+        //斐波拉切数列
+        var fibonacciPanel = new egret.DisplayObjectContainer();
+        this.addChild(fibonacciPanel);
+        fibonacciPanel.x = 0;
+        var fibn = 15;
+        for (var i = 0; i < fibn; i++) {
+            var btn = new egret.Sprite();
+            btn.graphics.beginFill(0x00ff00);
+            btn.graphics.drawRect(i * 10, -this.getFibonacci(fibn)[i] * 10, 10, 10);
+            btn.graphics.endFill();
+            fibonacciPanel.addChild(btn);
+        }
+        fibonacciPanel.y = egret.MainContext.instance.stage.stageHeight;
     };
     Main.prototype.sort = function (evt) {
         this._logTex.text = "";
@@ -59,7 +77,9 @@ var Main = (function (_super) {
         for (var i = 0; i < 100; i++) {
             this._sortArr.push(Math.random() * 10000);
         }
+        var curTime = egret.getTimer();
         var type = evt.currentTarget.name;
+        console.log(this._sortArr);
         switch (type) {
             case "system":
                 if (!this._system) {
@@ -74,21 +94,38 @@ var Main = (function (_super) {
                 this._bubbleSort = null;
                 break;
             case "quick":
-                if (!this._quickSort) {
-                    this._quickSort = new sort.quickSort(this._sortArr);
-                }
-                this._quickSort = null;
+                var quick = new sort.quickSort(this._sortArr);
+                quick = null;
+                break;
+            case "shell":
+                var shell = new sort.shellSort(this._sortArr);
+                shell = null;
+                break;
+            case "select":
+                var select = new sort.selectSort(this._sortArr);
+                select = null;
                 break;
             case "insert":
-                if (!this._inserSort) {
-                    this._inserSort = new sort.insertSort(this._sortArr);
-                }
-                this._inserSort = null;
+                var insert = new sort.selectSort(this._sortArr);
+                insert = null;
                 break;
         }
         for (var i = 0; i < this._sortArr.length; i++) {
             this._logTex.text += this._sortArr[i].toFixed(5) + "\n";
         }
+        alert((egret.getTimer() - curTime) / 1000);
+    };
+    Main.prototype.getFibonacci = function (n) {
+        var fibArr = [];
+        var i = 0;
+        while (i < n) {
+            if (i < 2)
+                fibArr.push(1);
+            else
+                fibArr.push(fibArr[i - 1] + fibArr[i - 2]);
+            i++;
+        }
+        return fibArr;
     };
     return Main;
 }(egret.DisplayObjectContainer));

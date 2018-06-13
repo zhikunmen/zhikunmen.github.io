@@ -15,7 +15,7 @@ module sort {
 					} else {
 						break;
 					}
-				}
+				} 
 				arr[j+1] = key;
 			}
 		}

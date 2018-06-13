@@ -5,13 +5,15 @@ var game_file_list = [
 	"libs/modules/egret/egret.js",
 	"libs/modules/egret/egret.native.js",
 	"libs/modules/game/game.js",
-	"polyfill/promise.js",
 	"bin-debug/Sort.js",
 	"bin-debug/bubbleSort.js",
 	"bin-debug/insertSort.js",
 	"bin-debug/Main.js",
 	"bin-debug/quickSort.js",
+	"bin-debug/selectSort.js",
+	"bin-debug/shellSort.js",
 	"bin-debug/systemSort.js",
+	"bin-debug/yefan.js",
 	//----auto game_file_list end----
 ];
 

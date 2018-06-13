@@ -14,39 +14,27 @@ var sort;
             return _super.call(this, arr) || this;
         }
         quickSort.prototype.init = function (arr) {
-            var i = 0;
-            var j = arr.length - 1;
-            this.sort(arr, i, j);
-        };
-        quickSort.prototype.sort = function (arr, i, j) {
-            if (i == j) {
-                return;
+            var qarr = this.quick(arr.concat());
+            for (var i = 0; i < qarr.length; i++) {
+                arr[i] = qarr[i];
             }
-            var key = arr[i];
-            var stepi = i;
-            var stepj = j;
-            while (j > i) {
-                if (arr[j] >= key) {
-                    j--;
+        };
+        quickSort.prototype.quick = function (arr) {
+            if (arr.length <= 1) {
+                return arr;
+            }
+            var leftArr = [];
+            var rightArr = [];
+            var q = arr[0];
+            for (var i = 1, l = arr.length; i < l; i++) {
+                if (arr[i] > q) {
+                    rightArr.push(arr[i]);
                 }
                 else {
-                    arr[i] = arr[j];
-                    while (j > ++i) {
-                        if (arr[i] > key) {
-                            arr[j] = arr[i];
-                            break;
-                        }
-                    }
+                    leftArr.push(arr[i]);
                 }
             }
-            if (stepi == i) {
-                this.sort(arr, ++i, stepj);
-                return;
-            }
-            arr[i] = key;
-            //递归
-            this.sort(arr, stepi, i);
-            this.sort(arr, j, stepj);
+            return [].concat(this.quick(leftArr), [q], this.quick(rightArr));
         };
         return quickSort;
     }(sort.Sort));

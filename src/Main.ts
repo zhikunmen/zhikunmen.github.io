@@ -12,9 +12,12 @@ class Main extends egret.DisplayObjectContainer {
     private _logTex: egret.TextField;
     private _scroll: egret.ScrollView;
     public initUI(): void {
-        this._sortFunc.push({ "name": "system","cn":"系统排序" }); 
-        this._sortFunc.push({ "name": "bubble","cn":"冒泡排序" });
-        this._sortFunc.push({ "name": "quick","cn":"快速排序" });
+        this._sortFunc.push({ "name": "system", "cn": "系统排序" });
+        this._sortFunc.push({ "name": "bubble", "cn": "冒泡排序" });
+        this._sortFunc.push({ "name": "quick", "cn": "快速排序" });
+        this._sortFunc.push({ "name": "shell", "cn": "希尔排序" });
+        this._sortFunc.push({ "name": "select", "cn": "选择排序" });
+        this._sortFunc.push({ "name": "insert", "cn": "插入排序" })
         this._btnPanel = new egret.Sprite();
         this.addChild(this._btnPanel);
         this._logTex = new egret.TextField();
@@ -50,6 +53,18 @@ class Main extends egret.DisplayObjectContainer {
             txt.name = this._sortFunc[i]["name"];
             txt.addEventListener(egret.TouchEvent.TOUCH_TAP, this.sort, this);
         }
+        //斐波拉切数列
+        let fibonacciPanel = new egret.DisplayObjectContainer();
+        this.addChild(fibonacciPanel); fibonacciPanel.x = 0;
+        let fibn = 15;
+        for (let i = 0; i < fibn; i++) {
+            let btn = new egret.Sprite();
+            btn.graphics.beginFill(0x00ff00);
+            btn.graphics.drawRect(i * 10, -this.getFibonacci(fibn)[i] * 10, 10, 10);
+            btn.graphics.endFill();
+            fibonacciPanel.addChild(btn);
+        }
+        fibonacciPanel.y = egret.MainContext.instance.stage.stageHeight;
     }
 
 
@@ -59,10 +74,11 @@ class Main extends egret.DisplayObjectContainer {
         for (let i = 0; i < 100; i++) {
             this._sortArr.push(Math.random() * 10000);
         }
+        let curTime = egret.getTimer();
         let type = evt.currentTarget.name;
         console.log(this._sortArr);
         switch (type) {
-            case "system":
+            case "system"://9.682
                 if (!this._system) {
                     this._system = new sort.systemSort(this._sortArr);
                 }
@@ -74,13 +90,39 @@ class Main extends egret.DisplayObjectContainer {
                 }
                 this._bubbleSort = null;
                 break;
-            case "quick":
+            case "quick"://20
                 let quick = new sort.quickSort(this._sortArr);
                 quick = null;
+                break;
+            case "shell":
+                let shell = new sort.shellSort(this._sortArr);
+                shell = null;
+                break;
+            case "select":
+                let select = new sort.selectSort(this._sortArr);
+                select = null;
+                break;
+            case "insert":
+                let insert = new sort.selectSort(this._sortArr);
+                insert = null;
                 break;
         }
         for (let i = 0; i < this._sortArr.length; i++) {
             this._logTex.text += this._sortArr[i].toFixed(5) + "\n";
         }
+        alert((egret.getTimer() - curTime) / 1000);
+    }
+
+    private getFibonacci(n): number[] {
+        var fibArr = [];
+        var i = 0;
+        while (i < n) {
+            if (i < 2)
+                fibArr.push(1);
+            else
+                fibArr.push(fibArr[i - 1] + fibArr[i - 2]);
+            i++;
+        }
+        return fibArr;
     }
 }

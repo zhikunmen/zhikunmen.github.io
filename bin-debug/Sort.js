@@ -6,7 +6,6 @@ var sort;
     var Sort = (function () {
         function Sort(arr) {
             this.init(arr);
-            console.error(arr);
         }
         Sort.prototype.init = function (arr) {
         };
