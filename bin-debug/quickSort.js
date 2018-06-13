@@ -25,6 +25,15 @@ var sort;
             }
             var leftArr = [];
             var rightArr = [];
+            var first = arr[0];
+            var last = arr[arr.length - 1];
+            var mid = arr[arr.length / 2];
+            var aaa = [first, last, mid];
+            arr[0] = Math.min.apply(this, aaa);
+            arr[arr.length - 1] = Math.max.apply(this, aaa);
+            aaa.splice(aaa.indexOf(arr[0]), 1);
+            aaa.splice(aaa.indexOf(arr[arr.length - 1]), 1);
+            arr[arr.length / 2] = aaa[0];
             var q = arr[0];
             for (var i = 1, l = arr.length; i < l; i++) {
                 if (arr[i] > q) {

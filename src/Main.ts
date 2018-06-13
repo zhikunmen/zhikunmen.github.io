@@ -18,6 +18,7 @@ class Main extends egret.DisplayObjectContainer {
         this._sortFunc.push({ "name": "shell", "cn": "希尔排序" });
         this._sortFunc.push({ "name": "select", "cn": "选择排序" });
         this._sortFunc.push({ "name": "insert", "cn": "插入排序" })
+        this._sortFunc.push({ "name": "merge", "cn": "归并排序" })
         this._btnPanel = new egret.Sprite();
         this.addChild(this._btnPanel);
         this._logTex = new egret.TextField();
@@ -71,7 +72,7 @@ class Main extends egret.DisplayObjectContainer {
     public sort(evt: egret.TouchEvent) {
         this._logTex.text = "";
         this._sortArr = [];
-        for (let i = 0; i < 100; i++) {
+        for (let i = 0; i < 100000; i++) {
             this._sortArr.push(Math.random() * 10000);
         }
         let curTime = egret.getTimer();
@@ -106,6 +107,10 @@ class Main extends egret.DisplayObjectContainer {
                 let insert = new sort.selectSort(this._sortArr);
                 insert = null;
                 break;
+            case "merge":
+                let merge = new sort.mergeSort(this._sortArr);
+                merge = null;
+                break
         }
         for (let i = 0; i < this._sortArr.length; i++) {
             this._logTex.text += this._sortArr[i].toFixed(5) + "\n";

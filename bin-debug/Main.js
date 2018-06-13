@@ -22,6 +22,7 @@ var Main = (function (_super) {
         this._sortFunc.push({ "name": "shell", "cn": "希尔排序" });
         this._sortFunc.push({ "name": "select", "cn": "选择排序" });
         this._sortFunc.push({ "name": "insert", "cn": "插入排序" });
+        this._sortFunc.push({ "name": "merge", "cn": "归并排序" });
         this._btnPanel = new egret.Sprite();
         this.addChild(this._btnPanel);
         this._logTex = new egret.TextField();
@@ -74,7 +75,7 @@ var Main = (function (_super) {
     Main.prototype.sort = function (evt) {
         this._logTex.text = "";
         this._sortArr = [];
-        for (var i = 0; i < 100; i++) {
+        for (var i = 0; i < 100000; i++) {
             this._sortArr.push(Math.random() * 10000);
         }
         var curTime = egret.getTimer();
@@ -108,6 +109,10 @@ var Main = (function (_super) {
             case "insert":
                 var insert = new sort.selectSort(this._sortArr);
                 insert = null;
+                break;
+            case "merge":
+                var merge = new sort.mergeSort(this._sortArr);
+                merge = null;
                 break;
         }
         for (var i = 0; i < this._sortArr.length; i++) {

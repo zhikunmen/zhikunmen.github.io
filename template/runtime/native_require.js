@@ -9,6 +9,7 @@ var game_file_list = [
 	"bin-debug/bubbleSort.js",
 	"bin-debug/insertSort.js",
 	"bin-debug/Main.js",
+	"bin-debug/mergeSort.js",
 	"bin-debug/quickSort.js",
 	"bin-debug/selectSort.js",
 	"bin-debug/shellSort.js",
