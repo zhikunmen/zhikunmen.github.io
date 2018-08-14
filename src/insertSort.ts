@@ -5,18 +5,16 @@ module sort {
 		}
 
 		public init(arr: number[]) {
-			var i = 1, j, step, key;
-			for (; i < arr.length; i++) {
-				step = j = i;
-				key = arr[j];
-				while (--j > -1) {
-					if (arr[j] > key) {
-						arr[j + 1] = arr[j];
-					} else {
-						break;
+			for (let i = 1; i <= arr.length - 1; i++) {
+				let j = i;
+				while (j > 0) {
+					if (arr[j - 1] > arr[j]) {
+						let tmp = arr[j]
+						arr[j] = arr[j - 1];
+						arr[j - 1] = tmp;
 					}
-				} 
-				arr[j+1] = key;
+					j--;
+				}
 			}
 		}
 	}

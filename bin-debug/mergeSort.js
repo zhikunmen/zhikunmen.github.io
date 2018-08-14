@@ -19,7 +19,6 @@ var sort;
             for (var i = 0; i < tmp.length; i++) {
                 arr[i] = tmp[i];
             }
-            arr = tmp;
         };
         mergeSort.prototype.mergetSort = function (arr) {
             if (arr.length <= 1)

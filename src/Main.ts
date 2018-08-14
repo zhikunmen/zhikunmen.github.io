@@ -19,6 +19,8 @@ class Main extends egret.DisplayObjectContainer {
         this._sortFunc.push({ "name": "select", "cn": "选择排序" });
         this._sortFunc.push({ "name": "insert", "cn": "插入排序" })
         this._sortFunc.push({ "name": "merge", "cn": "归并排序" })
+        this._sortFunc.push({ "name": "ms1", "cn": "一个递归将两个有序变成一个有序" })
+        this._sortFunc.push({ "name": "ms2", "cn": "一个循环找出第二大数" })
         this._btnPanel = new egret.Sprite();
         this.addChild(this._btnPanel);
         this._logTex = new egret.TextField();
@@ -72,12 +74,11 @@ class Main extends egret.DisplayObjectContainer {
     public sort(evt: egret.TouchEvent) {
         this._logTex.text = "";
         this._sortArr = [];
-        for (let i = 0; i < 100000; i++) {
+        for (let i = 0; i < 100; i++) {
             this._sortArr.push(Math.random() * 10000);
         }
         let curTime = egret.getTimer();
         let type = evt.currentTarget.name;
-        console.log(this._sortArr);
         switch (type) {
             case "system"://9.682
                 if (!this._system) {
@@ -104,13 +105,22 @@ class Main extends egret.DisplayObjectContainer {
                 select = null;
                 break;
             case "insert":
-                let insert = new sort.selectSort(this._sortArr);
+                let insert = new sort.insertSort(this._sortArr);
                 insert = null;
                 break;
             case "merge":
                 let merge = new sort.mergeSort(this._sortArr);
                 merge = null;
                 break
+            case "ms1":
+                let mid = Math.floor(this._sortArr.length / 2);
+                let left = this._sortArr.slice(0, mid).sort((a, b) => { return a - b });
+                let right = this._sortArr.slice(mid, this._sortArr.length).sort((a, b) => { return a - b });
+                this._sortArr = new ms1(left, right) as any;
+                break;
+            case "ms2":
+                let ms = new ms2(this._sortArr);
+                break;
         }
         for (let i = 0; i < this._sortArr.length; i++) {
             this._logTex.text += this._sortArr[i].toFixed(5) + "\n";
@@ -130,4 +140,5 @@ class Main extends egret.DisplayObjectContainer {
         }
         return fibArr;
     }
+
 }

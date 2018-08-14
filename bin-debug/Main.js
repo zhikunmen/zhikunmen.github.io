@@ -23,6 +23,8 @@ var Main = (function (_super) {
         this._sortFunc.push({ "name": "select", "cn": "选择排序" });
         this._sortFunc.push({ "name": "insert", "cn": "插入排序" });
         this._sortFunc.push({ "name": "merge", "cn": "归并排序" });
+        this._sortFunc.push({ "name": "ms1", "cn": "一个递归将两个有序变成一个有序" });
+        this._sortFunc.push({ "name": "ms2", "cn": "一个循环找出第二大数" });
         this._btnPanel = new egret.Sprite();
         this.addChild(this._btnPanel);
         this._logTex = new egret.TextField();
@@ -75,12 +77,11 @@ var Main = (function (_super) {
     Main.prototype.sort = function (evt) {
         this._logTex.text = "";
         this._sortArr = [];
-        for (var i = 0; i < 100000; i++) {
+        for (var i = 0; i < 100; i++) {
             this._sortArr.push(Math.random() * 10000);
         }
         var curTime = egret.getTimer();
         var type = evt.currentTarget.name;
-        console.log(this._sortArr);
         switch (type) {
             case "system":
                 if (!this._system) {
@@ -107,12 +108,21 @@ var Main = (function (_super) {
                 select = null;
                 break;
             case "insert":
-                var insert = new sort.selectSort(this._sortArr);
+                var insert = new sort.insertSort(this._sortArr);
                 insert = null;
                 break;
             case "merge":
                 var merge = new sort.mergeSort(this._sortArr);
                 merge = null;
+                break;
+            case "ms1":
+                var mid = Math.floor(this._sortArr.length / 2);
+                var left = this._sortArr.slice(0, mid).sort(function (a, b) { return a - b; });
+                var right = this._sortArr.slice(mid, this._sortArr.length).sort(function (a, b) { return a - b; });
+                this._sortArr = new ms1(left, right);
+                break;
+            case "ms2":
+                var ms = new ms2(this._sortArr);
                 break;
         }
         for (var i = 0; i < this._sortArr.length; i++) {
