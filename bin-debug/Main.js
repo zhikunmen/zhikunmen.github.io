@@ -23,8 +23,12 @@ var Main = (function (_super) {
         this._sortFunc.push({ "name": "select", "cn": "选择排序" });
         this._sortFunc.push({ "name": "insert", "cn": "插入排序" });
         this._sortFunc.push({ "name": "merge", "cn": "归并排序" });
+        this._sortFunc.push({ "name": "topK", "cn": "找出最大的前100,topK算法" });
+        this._sortFunc.push({ "name": "BinarySearch", "cn": "二分查找" });
         this._sortFunc.push({ "name": "ms1", "cn": "一个递归将两个有序变成一个有序" });
         this._sortFunc.push({ "name": "ms2", "cn": "一个循环找出第二大数" });
+        this._sortFunc.push({ "name": "ms3", "cn": "打印数组全排列" });
+        this._sortFunc.push({ "name": "ms4", "cn": "找出一组数组中重复的数字" });
         this._btnPanel = new egret.Sprite();
         this.addChild(this._btnPanel);
         this._logTex = new egret.TextField();
@@ -54,7 +58,6 @@ var Main = (function (_super) {
             txt.y = 40 * i + 50;
             txt.textColor = 0xff0000;
             txt.size = 30;
-            txt.width = 200;
             txt.touchEnabled = true;
             txt.textAlign = egret.HorizontalAlign.LEFT;
             txt.name = this._sortFunc[i]["name"];
@@ -77,7 +80,7 @@ var Main = (function (_super) {
     Main.prototype.sort = function (evt) {
         this._logTex.text = "";
         this._sortArr = [];
-        for (var i = 0; i < 100; i++) {
+        for (var i = 0; i < 100000; i++) {
             this._sortArr.push(Math.random() * 10000);
         }
         var curTime = egret.getTimer();
@@ -115,6 +118,13 @@ var Main = (function (_super) {
                 var merge = new sort.mergeSort(this._sortArr);
                 merge = null;
                 break;
+            case "topK":
+                var topk = new topK(this._sortArr);
+                // console.log(topK);
+                break;
+            case "BinarySearch":
+                new BinarySearchClass();
+                break;
             case "ms1":
                 var mid = Math.floor(this._sortArr.length / 2);
                 var left = this._sortArr.slice(0, mid).sort(function (a, b) { return a - b; });
@@ -122,10 +132,16 @@ var Main = (function (_super) {
                 this._sortArr = new ms1(left, right);
                 break;
             case "ms2":
-                var ms = new ms2(this._sortArr);
+                var ms_2 = new ms2(this._sortArr);
+                break;
+            case "ms3":
+                var ms_3 = new ms3([1, 2, 3, 4]);
+                break;
+            case "ms4":
+                var ms_4 = new ms4([11, 23, 321, 543, 1321, 56, 23, 11, 534, 11]);
                 break;
         }
-        for (var i = 0; i < this._sortArr.length; i++) {
+        for (var i = 0; i < 100; i++) {
             this._logTex.text += this._sortArr[i].toFixed(5) + "\n";
         }
         alert((egret.getTimer() - curTime) / 1000);

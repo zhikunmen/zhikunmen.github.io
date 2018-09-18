@@ -6,13 +6,16 @@
 	],
 	"game": [
 		"bin-debug/Sort.js",
-		"bin-debug/bubbleSort.js",
-		"bin-debug/insertSort.js",
+		"bin-debug/shellSort.js",
 		"bin-debug/Main.js",
+		"bin-debug/mergeSort.js",
 		"bin-debug/quickSort.js",
 		"bin-debug/selectSort.js",
-		"bin-debug/shellSort.js",
+		"bin-debug/insertSort.js",
+		"bin-debug/bubbleSort.js",
 		"bin-debug/systemSort.js",
-		"bin-debug/yefan.js"
+		"bin-debug/yefan.js",
+		"bin-debug/ms/ms1.js",
+		"bin-debug/ms/ms2.js"
 	]
 }
