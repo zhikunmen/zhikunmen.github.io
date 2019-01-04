@@ -1,9 +1,9 @@
-function deepCopy(arr) {
-	if (typeof arr != 'object') return arr;
-	let newObj = arr instanceof Array ? [] : {};
-	for (let key in arr) {
+function deepCopy(oldObj) {
+	if (typeof oldObj != 'object') return oldObj;
+	let newObj = oldObj instanceof Array ? [] : {};
+	for (let key in oldObj) {
 		if (!newObj.hasOwnProperty(key)) {
-			newObj[key] = typeof arr[key] === 'object' ? deepCopy(arr[key]) : arr[key];
+			newObj[key] = typeof oldObj[key] === 'object' ? deepCopy(oldObj[key]) : oldObj[key];
 		}
 	}
 	return newObj;
