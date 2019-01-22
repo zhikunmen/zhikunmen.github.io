@@ -31,4 +31,3 @@ function topKFunc(arr) {
     });
     return arr = tempArr;
 }
-//# sourceMappingURL=topK.js.map

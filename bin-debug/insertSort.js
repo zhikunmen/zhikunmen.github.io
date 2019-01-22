@@ -31,4 +31,3 @@ var sort;
     sort.insertSort = insertSort;
     __reflect(insertSort.prototype, "sort.insertSort");
 })(sort || (sort = {}));
-//# sourceMappingURL=insertSort.js.map

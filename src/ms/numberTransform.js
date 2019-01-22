@@ -20,7 +20,7 @@ function finnalResult() {
     //数组翻转
     let reverseNumbers = numbers.reverse()
     reverseNumbers.forEach((f) => {
-        if (f >= 10) {//16进制转ascii码 A 55 a 97
+        if (f >= 10) {//16进制转ascii码 A 65 a 97
             f += 55;
             f = String.fromCharCode(f);
         }

@@ -23,4 +23,3 @@ function allRange(arr, path, b) {
         allRange(t, p, b);
     });
 }
-//# sourceMappingURL=ms3.js.map

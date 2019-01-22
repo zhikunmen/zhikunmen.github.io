@@ -24,4 +24,3 @@ function func(arr) {
     }
     console.log(repeatArr);
 }
-//# sourceMappingURL=ms4.js.map

@@ -20,4 +20,3 @@ var ms1 = (function () {
     return ms1;
 }());
 __reflect(ms1.prototype, "ms1");
-//# sourceMappingURL=ms1.js.map
