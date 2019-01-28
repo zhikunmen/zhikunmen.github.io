@@ -8,7 +8,7 @@ var ms1 = (function () {
     ms1.prototype.func1 = function (left, right, tmp) {
         if (tmp === void 0) { tmp = []; }
         if (left.length && right.length) {
-            left[0] < right[0] ? tmp = tmp.concat(left.shift()) : tmp = tmp.concat(right.shift());
+            left[0] < right[0] ? tmp.push(left.shift()) : tmp.push(right.shift());
             return this.func1(left, right, tmp);
         }
         else {

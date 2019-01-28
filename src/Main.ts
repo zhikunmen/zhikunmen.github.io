@@ -12,6 +12,31 @@ class Main extends egret.DisplayObjectContainer {
     private _logTex: egret.TextField;
     private _scroll: egret.ScrollView;
     public initUI(): void {
+        let div = document.getElementsByClassName("egret-player")[0];
+        let htmlCode = document.createElement("img");
+        htmlCode.src = "https://wx.qlogo.cn/mmopen/vi_32/BPhthiaYBfZoYfc3WJjyWRNZbnk86yR3IiacSo9091zUW9FzZvD9BGlECK84VjkLXvH3QD8Fcy6HhaEOjhrC8LAg/132";
+        htmlCode.style.position = "relative";
+        function setPostion(left, top, width, height) {
+            let xScale;
+            let yScale;
+            if (document.body.clientWidth < document.body.clientHeight) {//竖屏
+                xScale = document.body.clientWidth / egret.MainContext.instance.stage.stageWidth;
+                yScale = document.body.clientHeight / egret.MainContext.instance.stage.stageHeight;
+                htmlCode.style.width = width * xScale + `px`;
+                htmlCode.style.height = height * yScale + `px`;
+                htmlCode.style.left = left * xScale + `px`;
+                htmlCode.style.top = top * xScale + `px`;
+            } else {//横屏
+                xScale = document.body.clientWidth / egret.MainContext.instance.stage.stageHeight;
+                yScale = document.body.clientHeight / egret.MainContext.instance.stage.stageWidth;
+                htmlCode.style.width = height * xScale + `px`;
+                htmlCode.style.height = width * yScale + `px`;
+                htmlCode.style.left = left * xScale + `px`;
+                htmlCode.style.top = top * xScale + `px`;
+            }
+        }
+        setPostion(300,300,100,100);
+        div.appendChild(htmlCode);
         this._sortFunc.push({ "name": "system", "cn": "系统排序" });
         this._sortFunc.push({ "name": "bubble", "cn": "冒泡排序" });
         this._sortFunc.push({ "name": "quick", "cn": "快速排序" });
@@ -77,8 +102,8 @@ class Main extends egret.DisplayObjectContainer {
     public sort(evt: egret.TouchEvent) {
         this._logTex.text = "";
         this._sortArr = [];
-        for (let i = 0; i < 100000; i++) {
-            this._sortArr.push(Math.random() * 10000);
+        for (let i = 0; i < 100; i++) {
+            this._sortArr.push(Math.random() * 100);
         }
         let curTime = egret.getTimer();
         let type = evt.currentTarget.name;
@@ -117,7 +142,7 @@ class Main extends egret.DisplayObjectContainer {
                 break
             case "topK":
                 let topk = new topK(this._sortArr);
-                // console.log(topK);
+                console.log(topK);
                 break;
             case "BinarySearch":
                 new BinarySearchClass();

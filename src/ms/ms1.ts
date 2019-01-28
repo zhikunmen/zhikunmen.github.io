@@ -5,7 +5,7 @@ class ms1 {
 
 	public func1(left: number[], right: number[], tmp = []) {
 		if (left.length && right.length) {
-			left[0] < right[0] ? tmp = tmp.concat(left.shift()) : tmp = tmp.concat(right.shift());
+			left[0] < right[0] ? tmp.push(left.shift()) : tmp.push(right.shift());
 			return this.func1(left, right, tmp);
 		} else {
 			tmp = tmp.concat(left, right)

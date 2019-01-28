@@ -6,6 +6,13 @@ class BinarySearchClass {
 }
 
 function BinarySearch(arr: number[], key: number, low: number = 0, high: number = arr.length) {
+	if (low == high) {
+		if (arr[low] == key) {
+			return low;
+		} else {
+			return -1;//二分查找也没有找到
+		}
+	}
 	let middle = Math.floor((low + high) / 2);
 	if (arr[middle] == key) {
 		return middle;

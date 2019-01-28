@@ -14,16 +14,15 @@ var sort;
             return _super.call(this, arr) || this;
         }
         insertSort.prototype.init = function (arr) {
-            for (var i = 1; i <= arr.length - 1; i++) {
+            var temp;
+            for (var i = 1; i < arr.length; i++) {
                 var j = i;
-                while (j > 0) {
-                    if (arr[j - 1] > arr[j]) {
-                        var tmp = arr[j];
-                        arr[j] = arr[j - 1];
-                        arr[j - 1] = tmp;
-                    }
+                temp = arr[j];
+                while (j > 0 && arr[j - 1] > temp) {
+                    arr[j] = arr[j - 1];
                     j--;
                 }
+                arr[j] = temp;
             }
         };
         return insertSort;

@@ -4,17 +4,6 @@ class topK {
 		temp.forEach((f, i) => {
 			arr[i] = f;
 		})
-
-		var callBack = () => {
-			console.log("111");
-		}
-
-
-		var a = new Promise((resolve, reject) => {
-			resolve();
-			console.log("2");
-		}).then(function () { return callBack() });
-		console.log(a);
 	}
 }
 

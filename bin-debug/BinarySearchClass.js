@@ -13,6 +13,14 @@ __reflect(BinarySearchClass.prototype, "BinarySearchClass");
 function BinarySearch(arr, key, low, high) {
     if (low === void 0) { low = 0; }
     if (high === void 0) { high = arr.length; }
+    if (low == high) {
+        if (arr[low] == key) {
+            return low;
+        }
+        else {
+            return -1; //二分查找也没有找到
+        }
+    }
     var middle = Math.floor((low + high) / 2);
     if (arr[middle] == key) {
         return middle;

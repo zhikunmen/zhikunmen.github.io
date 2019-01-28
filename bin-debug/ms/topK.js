@@ -7,14 +7,6 @@ var topK = (function () {
         temp.forEach(function (f, i) {
             arr[i] = f;
         });
-        var callBack = function () {
-            console.log("111");
-        };
-        var a = new Promise(function (resolve, reject) {
-            resolve();
-            console.log("2");
-        }).then(function () { return callBack(); });
-        console.log(a);
     }
     return topK;
 }());

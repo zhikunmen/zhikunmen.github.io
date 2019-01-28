@@ -3,18 +3,16 @@ module sort {
 		public constructor(arr: number[]) {
 			super(arr);
 		}
-
 		public init(arr: number[]) {
-			for (let i = 1; i <= arr.length - 1; i++) {
+			var temp;
+			for (let i = 1; i < arr.length; i++) {
 				let j = i;
-				while (j > 0) {
-					if (arr[j - 1] > arr[j]) {
-						let tmp = arr[j]
-						arr[j] = arr[j - 1];
-						arr[j - 1] = tmp;
-					}
+				temp = arr[j];
+				while (j > 0 && arr[j - 1] > temp) {
+					arr[j] = arr[j - 1];
 					j--;
 				}
+				arr[j] = temp;
 			}
 		}
 	}
