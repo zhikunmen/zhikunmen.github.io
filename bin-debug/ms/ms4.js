@@ -12,7 +12,7 @@ function func(arr) {
     arr.sort();
     var repeatArr = [];
     for (var i = 0; i < arr.length;) {
-        console.log(i);
+        console.log(i, arr[i]);
         var item = arr[i];
         if (arr.indexOf(item) != arr.lastIndexOf(item)) {
             repeatArr.push(item);

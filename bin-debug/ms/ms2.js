@@ -10,12 +10,12 @@ var ms2 = (function () {
         var second = arr[0];
         arr.forEach(function (f) {
             if (f > max) {
-                second = max;
-                max = f;
+                _a = [f, max], max = _a[0], second = _a[1];
             }
             else if (f < max && f > second) {
                 second = f;
             }
+            var _a;
         });
         alert(second);
         arr.sort(function (a, b) { return a - b; });

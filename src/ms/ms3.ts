@@ -1,21 +1,28 @@
 class ms3 {
 	public constructor(arr: number[]) {
-		let b = [];
-		allRange(arr, [], b);
-		console.log(b);
+		console.log(allRange(arr));
 	}
 }
 
-function allRange(arr: number[], path, b): void {
-	if (!arr.length) {
-		b.push(path);
-		return;
+/**二维数组解决 */
+function allRange(arr: number[]) {
+	let length = arr.length;
+	if (length == 1) {
+		return arr;
+	} else if (length == 2) {
+		return [[arr[0], arr[1]], [arr[1], arr[0]]];
+	} else {//三个及以上
+		let temp =  [];
+		for (var i = 0; i < length; i++) {
+			let save = arr[i];
+			arr.splice(i, 1);
+			let res = allRange(arr);
+			arr.splice(i, 0, save);
+			for (let j = 0; j < res.length; j++) {
+				res[j].push(arr[i]);
+				temp.push(res[j])
+			}
+		}
+		return temp;
 	}
-	arr.forEach((value, key) => {
-		let t = arr.slice();
-		let p = path.slice();
-		t.splice(key, 1);
-		p.push(value);
-		allRange(t, p, b);
-	})
 }

@@ -9,7 +9,7 @@ function func(arr: number[]) {
 	arr.sort();
 	let repeatArr = [];
 	for (let i = 0; i < arr.length;) {
-		console.log(i);
+		console.log(i,arr[i]);
 		let item = arr[i];
 		if (arr.indexOf(item) != arr.lastIndexOf(item)) {
 			repeatArr.push(item);

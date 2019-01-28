@@ -8,8 +8,7 @@ class ms2 {
 		let second = arr[0];
 		arr.forEach((f) => {
 			if (f > max) {
-				second = max;
-				max = f;
+				[max, second] = [f, max];
 			} else if (f < max && f > second) {
 				second = f;
 			}

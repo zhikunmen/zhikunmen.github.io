@@ -3,23 +3,32 @@ var __reflect = (this && this.__reflect) || function (p, c, t) {
 };
 var ms3 = (function () {
     function ms3(arr) {
-        var b = [];
-        allRange(arr, [], b);
-        console.log(b);
+        console.log(allRange(arr));
     }
     return ms3;
 }());
 __reflect(ms3.prototype, "ms3");
-function allRange(arr, path, b) {
-    if (!arr.length) {
-        b.push(path);
-        return;
+/**二维数组解决 */
+function allRange(arr) {
+    var length = arr.length;
+    if (length == 1) {
+        return arr;
     }
-    arr.forEach(function (value, key) {
-        var t = arr.slice();
-        var p = path.slice();
-        t.splice(key, 1);
-        p.push(value);
-        allRange(t, p, b);
-    });
+    else if (length == 2) {
+        return [[arr[0], arr[1]], [arr[1], arr[0]]];
+    }
+    else {
+        var temp = [];
+        for (var i = 0; i < length; i++) {
+            var save = arr[i];
+            arr.splice(i, 1);
+            var res = allRange(arr);
+            arr.splice(i, 0, save);
+            for (var j = 0; j < res.length; j++) {
+                res[j].push(arr[i]);
+                temp.push(res[j]);
+            }
+        }
+        return temp;
+    }
 }

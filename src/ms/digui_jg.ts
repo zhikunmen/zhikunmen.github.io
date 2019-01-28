@@ -7,11 +7,11 @@
  */
 function jg(num, time) {
     if (num == 1) {
-        console.log("循环了" + time )
+        console.log("循环了" + time)
         return time;
     } else {
         console.log("当前数:", num, "循环次数:" + time);
-        return (num % 2 == 0 ? jg(num / 2, ++time) : jg(num * 3 + + 1, ++time));
+        return (num % 2 == 0 ? jg(num / 2, ++time) : jg(num * 3 + 1, ++time));
     }
 }
 
